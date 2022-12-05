@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Page</title>
+</head>
+<body>
+        {% block content %}
+        {% if user.is_authenticated %}
+            <p>Hello, {{ user.get_username }}.</p>
+            {% if queryset %}
+            <table border="1px">
+                <tr>
+                    <th>Created Date</th>
+                    <th>Weight</th>
+                </tr>
+                 <tr>
+                    {% for i in queryset %}
+                    <td>{{i.created_date}}</td>
+                    <td>{{i.weight}}</td>
+
+                </tr>
+                {% endfor %}
+            </table>
+
+            {% endif %}
+            <br><br><br>
+            <a href="{% url 'logout_view' %}">log out.</a>
+        {% else %}
+            <p>Hello User, Please  <a href="{% url 'login_request'%}">log in</a> and try again.</p>
+        {% endif %}
+        {% endblock %}
+</body>
+</html>
